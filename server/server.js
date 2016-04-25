@@ -45,9 +45,18 @@ app.put('/lions/:id', function(req, res) {
   }
 });
 
+app.delete('/lions/:id', function(req, res){
+  var lion = _.findIndex(lions, {id: req.params.id});
+  if (!lions[lion]) {
+    res.send("not found");
+  } else {
+    lions.splice(lion, 1);
+    res.send('resourse deleted');
+  }
+});
+
 app.set('port', (process.env.PORT || 8080));
 
 app.listen(app.get('port'), function() {
  console.log("Node app is running at localhost:" + app.get('port'))
 });
-
